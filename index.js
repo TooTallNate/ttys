@@ -16,5 +16,5 @@ if (tty.isatty(1)) {
 } else {
   var ttyFd = fs.openSync('/dev/tty', 'w')
   assert(tty.isatty(ttyFd))
-  exports.stdin = new tty.WriteStream(ttyFd)
+  exports.stdout = new tty.WriteStream(ttyFd)
 }
