@@ -9,6 +9,7 @@ if (tty.isatty(0)) {
   var ttyFd = fs.openSync('/dev/tty', 'r')
   assert(tty.isatty(ttyFd))
   exports.stdin = new tty.ReadStream(ttyFd)
+  exports.stdin._type = 'tty'
 }
 
 if (tty.isatty(1)) {
@@ -17,4 +18,5 @@ if (tty.isatty(1)) {
   var ttyFd = fs.openSync('/dev/tty', 'w')
   assert(tty.isatty(ttyFd))
   exports.stdout = new tty.WriteStream(ttyFd)
+  exports.stdout._type = 'tty'
 }
