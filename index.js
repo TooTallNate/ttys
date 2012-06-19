@@ -19,4 +19,11 @@ if (tty.isatty(1)) {
   assert(tty.isatty(ttyFd))
   exports.stdout = new tty.WriteStream(ttyFd)
   exports.stdout._type = 'tty'
+
+  // Hack to have the stdout stream not keep the event loop alive.
+  // See: https://github.com/joyent/node/issues/1726
+  // XXX: remove/fix this once src/node.js does something different as well.
+  if (exports.stdout._handle && exports.stdout._handle.unref) {
+    exports.stdout._handle.unref();
+  }
 }
