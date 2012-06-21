@@ -24,6 +24,6 @@ if (tty.isatty(1)) {
   // See: https://github.com/joyent/node/issues/1726
   // XXX: remove/fix this once src/node.js does something different as well.
   if (exports.stdout._handle && exports.stdout._handle.unref) {
-    exports.stdout._handle.unref();
+    exports.stdout._handle.unref()
   }
 }
