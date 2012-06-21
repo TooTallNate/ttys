@@ -26,4 +26,12 @@ if (tty.isatty(1)) {
   if (exports.stdout._handle && exports.stdout._handle.unref) {
     exports.stdout._handle.unref()
   }
+
+  // Update the "columns" and "rows" properties on the stdout stream
+  // whenever the console window gets resized.
+  if (exports.stdout._refreshSize) {
+    process.on('SIGWINCH', function () {
+      exports.stdout._refreshSize()
+    })
+  }
 }
